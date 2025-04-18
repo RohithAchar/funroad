@@ -1,14 +1,14 @@
-import { Category } from "@/payload-types";
 import CategoryDropdown from "./category-dropdown";
+import { CustomCategory } from "../types";
 
 interface props {
-  data: any;
+  data: CustomCategory[];
 }
 
 const Categories = ({ data }: props) => {
   return (
-    <div className="flex gap-4">
-      {data.map((item: Category) => (
+    <div className="flex gap-2">
+      {data.map((item) => (
         <div key={item.id}>
           <CategoryDropdown category={item} />
         </div>
