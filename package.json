@@ -7,7 +7,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate:fresh": "pnpm payload migrate:fresh"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
