@@ -1,11 +1,11 @@
-import CategoryDropdown from "./category-dropdown";
 import { CustomCategory } from "../types";
+import CategoryDropdown from "./category-dropdown";
 
-interface props {
+interface Props {
   data: CustomCategory[];
 }
 
-const Categories = ({ data }: props) => {
+const Categories = ({ data }: Props) => {
   return (
     <div className="flex gap-2">
       {data.map((item) => (

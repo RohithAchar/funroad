@@ -165,6 +165,7 @@ const runSeed = async () => {
   }
 
   console.log("✅ Seeded successfully");
+  process.exit(0);
 };
 
 runSeed().catch((err) => {

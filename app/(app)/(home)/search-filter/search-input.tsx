@@ -1,11 +1,18 @@
-import { Input } from "@/components/ui/input";
+"use client";
+
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { useTRPC } from "@/trpc/client";
 import { SearchIcon } from "lucide-react";
+
+import { Input } from "@/components/ui/input";
 
 interface props {
   disabled?: boolean;
 }
 
 const SearchInput = ({ disabled }: props) => {
+  const trpc = useTRPC();
+  const { data } = useSuspenseQuery(trpc.categories.getMany.queryOptions());
   return (
     <div className="flex items-center gap-2">
       <div className="relative w-full">
