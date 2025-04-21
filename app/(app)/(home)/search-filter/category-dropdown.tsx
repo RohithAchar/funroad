@@ -22,7 +22,7 @@ const CategoryDropdown = ({ category, isActive }: Props) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-0">
         {category.subcategories.length > 0 &&
-          category.subcategories?.map((item: CustomCategory) => (
+          category.subcategories?.map((item) => (
             <Link href={`/${category.slug}/${item.slug}`}>
               <DropdownMenuItem
                 key={item.id}
