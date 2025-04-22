@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
 
 import { loginSchema } from "../../schemas";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,14 +33,15 @@ const poppins = Poppins({
 const SignIn = () => {
   const trpc = useTRPC();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const register = useMutation(
     trpc.auth.login.mutationOptions({
       onError: (err) => {
         toast.error(err.message);
       },
-      onSuccess: () => {
+      onSuccess: async () => {
         toast.success("Login successfully");
-        router.refresh();
+        await queryClient.invalidateQueries(trpc.auth.session.queryFilter());
         router.push("/");
       },
     })
@@ -89,18 +90,6 @@ const SignIn = () => {
             <h1 className="text-4xl font-medium">
               Join over 1,527 creators earning money on Funroad.
             </h1>
-            <FormField
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base">Username</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               name="email"
               render={({ field }) => (
