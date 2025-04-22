@@ -1,13 +1,12 @@
 "use client";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { CustomCategory } from "../types";
+import { useState, useRef } from "react";
 import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+
+import { CustomCategory } from "../types";
+import { cn } from "@/lib/utils";
 
 interface Props {
   category: CustomCategory;
@@ -15,25 +14,72 @@ interface Props {
 }
 
 const CategoryDropdown = ({ category, isActive }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    // Add delay before closing to prevent accidental closes
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+      setHoveredIndex(null); // Reset hovered state when dropdown closes
+    }, 100); // 100ms delay
+  };
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="px-4 py-2 rounded-full bg-white hover:shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:-translate-x-[4px] hover:-translate-y-[4px] border border-transparent hover:border-black transition-all">
-        {category.category}
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-0">
-        {category.subcategories.length > 0 &&
-          category.subcategories?.map((item) => (
-            <Link href={`/${category.slug}/${item.slug}`}>
-              <DropdownMenuItem
-                key={item.id}
-                className="p-4 w-full rounded-none font-medium text-base underline"
+    <div
+      className="relative inline-block"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Button
+        variant="elevated"
+        className={cn(
+          "rounded-full border-white hover:border-black text-base font-medium",
+          isActive && "border-black"
+        )}
+      >
+        <Link href={`/${category.slug}`}>{category.category}</Link>
+      </Button>
+
+      {isOpen && category.subcategories.length > 0 && (
+        <div
+          className="absolute left-0 mt-2 border border-gray-200 rounded z-10 min-w-full w-60 shadow-lg"
+          style={{ backgroundColor: category.color || "#fff" }}
+        >
+          {category.subcategories.length > 0 &&
+            category.subcategories?.map((item, index) => (
+              <Link
+                key={item.id || item.slug}
+                href={`/${category.slug}/${item.slug}`}
+                className="block p-4 font-medium text-base underline"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                style={{
+                  backgroundColor:
+                    hoveredIndex === index
+                      ? "rgba(0, 0, 0, 0.07)"
+                      : "transparent",
+                  transition: "background-color 0.2s ease",
+                  borderRadius: hoveredIndex === index ? "4px" : "0",
+                  margin: "4px",
+                  width: "calc(100% - 8px)",
+                }}
               >
                 {item.category}
-              </DropdownMenuItem>
-            </Link>
-          ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+              </Link>
+            ))}
+        </div>
+      )}
+    </div>
   );
 };
 
