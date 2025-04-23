@@ -14,7 +14,7 @@ export const SearchFilters = () => {
   const pathName = usePathname();
 
   const category = pathName.split("/")[1] || "all";
-  const color = data.find((item) => item.slug === category)?.color || "#FFFFFF";
+  const color = data.find((item) => item.slug === category)?.color || "#F4F4F0";
 
   return (
     <div

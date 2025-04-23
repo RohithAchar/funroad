@@ -10,8 +10,8 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
 
-import NavbarSidebar from "./navbar-sidebar";
 import { MenuIcon } from "lucide-react";
+import NavbarSidebar from "./navbar-sidebar";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["700"] });
 

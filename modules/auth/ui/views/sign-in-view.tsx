@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -82,8 +81,8 @@ const SignIn = () => {
                 size="sm"
                 className="text-base border-none underline"
               >
-                <Link prefetch href="/sign-in">
-                  Sign in
+                <Link prefetch href="/sign-up">
+                  Sign up
                 </Link>
               </Button>
             </div>

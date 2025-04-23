@@ -5,8 +5,8 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
-import { CustomCategory } from "../types";
 import { cn } from "@/lib/utils";
+import { CustomCategory } from "@/app/(app)/(home)/types";
 
 interface Props {
   category: CustomCategory;
@@ -41,6 +41,7 @@ const CategoryDropdown = ({ category, isActive }: Props) => {
       onMouseLeave={handleMouseLeave}
     >
       <Button
+        asChild
         variant="elevated"
         className={cn(
           "rounded-full border-white hover:border-black text-base font-medium",
@@ -52,7 +53,7 @@ const CategoryDropdown = ({ category, isActive }: Props) => {
 
       {isOpen && category.subcategories.length > 0 && (
         <div
-          className="absolute left-0 mt-2 border rounded z-10 min-w-full w-60"
+          className="absolute left-0 mt-2 border rounded z-10 min-w-full w-60 shadow-[4px_4px_0_0_rgba(0,0,0,1)]"
           style={{ backgroundColor: category.color || "#fff" }}
         >
           {category.subcategories.length > 0 &&

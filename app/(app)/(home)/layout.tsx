@@ -1,10 +1,14 @@
 import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-import Navbar from "./navbar";
-import Footer from "./footer";
-import { SearchFilters, SearchFilterSkeleton } from "./search-filter";
+import Footer from "@/modules/home/ui/components/footer";
 import { Suspense } from "react";
+
+import Navbar from "@/modules/home/ui/components/navbar";
+import {
+  SearchFilters,
+  SearchFilterSkeleton,
+} from "@/modules/home/ui/components/search-filter";
 
 interface props {
   children: React.ReactNode;
