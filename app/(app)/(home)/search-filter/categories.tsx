@@ -10,7 +10,7 @@ interface Props {
 const all: CustomCategory = {
   id: "all",
   category: "All",
-  slug: "all",
+  slug: "/",
   color: "#fff",
   subcategories: [],
   // Add the missing properties

@@ -52,7 +52,7 @@ const CategoryDropdown = ({ category, isActive }: Props) => {
 
       {isOpen && category.subcategories.length > 0 && (
         <div
-          className="absolute left-0 mt-2 border border-gray-200 rounded z-10 min-w-full w-60 shadow-lg"
+          className="absolute left-0 mt-2 border rounded z-10 min-w-full w-60"
           style={{ backgroundColor: category.color || "#fff" }}
         >
           {category.subcategories.length > 0 &&
