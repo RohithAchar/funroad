@@ -31,7 +31,7 @@ const CategoryDropdown = ({ category, isActive }: Props) => {
     timeoutRef.current = setTimeout(() => {
       setIsOpen(false);
       setHoveredIndex(null); // Reset hovered state when dropdown closes
-    }, 100); // 100ms delay
+    }, 50); // 50ms delay
   };
 
   return (
@@ -66,9 +66,8 @@ const CategoryDropdown = ({ category, isActive }: Props) => {
                 onMouseLeave={() => setHoveredIndex(null)}
                 style={{
                   backgroundColor:
-                    hoveredIndex === index
-                      ? "rgba(0, 0, 0, 0.07)"
-                      : "transparent",
+                    hoveredIndex === index ? "#000000" : "transparent",
+                  color: hoveredIndex === index ? "#ffffff" : "#000000",
                   transition: "background-color 0.2s ease",
                   borderRadius: hoveredIndex === index ? "4px" : "0",
                   margin: "4px",

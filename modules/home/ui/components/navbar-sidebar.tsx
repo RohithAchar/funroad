@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+
+import { useTRPC } from "@/trpc/client";
 
 import {
   Sheet,
@@ -21,6 +24,9 @@ interface Props {
 }
 
 const NavbarSidebar = ({ items, open, onOpenChange }: Props) => {
+  const trpc = useTRPC();
+  const session = useQuery(trpc.auth.session.queryOptions());
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="left" className="p-0 transition-none">
@@ -39,20 +45,32 @@ const NavbarSidebar = ({ items, open, onOpenChange }: Props) => {
               {item.children}
             </Link>
           ))}
-          <div className="border-t">
-            <Link
-              className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
-              href="sign-in"
-            >
-              Sign In
-            </Link>
-            <Link
-              className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
-              href="sign-up"
-            >
-              Start Selling
-            </Link>
-          </div>
+
+          {session.data?.user ? (
+            <div className="border-t">
+              <Link
+                className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
+                href="/admin"
+              >
+                Dashboard
+              </Link>
+            </div>
+          ) : (
+            <div className="border-t">
+              <Link
+                className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
+                href="/sign-in"
+              >
+                Sign In
+              </Link>
+              <Link
+                className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
+                href="/sign-up"
+              >
+                Start Selling
+              </Link>
+            </div>
+          )}
         </ScrollArea>
       </SheetContent>
     </Sheet>
