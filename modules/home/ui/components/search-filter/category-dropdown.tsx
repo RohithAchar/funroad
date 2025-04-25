@@ -48,7 +48,7 @@ const CategoryDropdown = ({ category, isActive }: Props) => {
           isActive && "border-black"
         )}
       >
-        <Link href={`/${category.slug}`}>{category.category}</Link>
+        <Link href={`/${category.slug}`}>{category.name}</Link>
       </Button>
 
       {isOpen && category.subcategories.length > 0 && (
@@ -74,7 +74,7 @@ const CategoryDropdown = ({ category, isActive }: Props) => {
                   width: "calc(100% - 8px)",
                 }}
               >
-                {item.category}
+                {item.name}
               </Link>
             ))}
         </div>

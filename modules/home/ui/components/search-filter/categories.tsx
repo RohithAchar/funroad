@@ -9,7 +9,7 @@ interface Props {
 
 const all: CustomCategory = {
   id: "all",
-  category: "All",
+  name: "All",
   slug: "/",
   color: "#fff",
   subcategories: [],

@@ -142,7 +142,7 @@ const runSeed = async () => {
     const parent = await payload.create({
       collection: "categories",
       data: {
-        category: category.name,
+        name: category.name,
         slug: category.slug,
         color: category.color,
       },
@@ -152,7 +152,7 @@ const runSeed = async () => {
       await payload.create({
         collection: "categories",
         data: {
-          category: sub.name,
+          name: sub.name,
           slug: sub.slug,
           parent: parent.id,
         },

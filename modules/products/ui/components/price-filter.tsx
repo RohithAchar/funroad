@@ -1,9 +1,7 @@
-"use client";
-
 import { ChangeEvent } from "react";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@radix-ui/react-label";
+import { Label } from "@/components/ui/label";
 
 interface Props {
   minPrice?: string | null;
@@ -55,7 +53,7 @@ const PriceFilter = ({
         <Label className="font-medium text-base">Minimum Price</Label>
         <Input
           type="text"
-          placeholder="0.00"
+          placeholder="₹0.00"
           value={minPrice ? formateAsCurrency(minPrice) : ""}
           onChange={handleMinPriceChange}
         />
@@ -64,7 +62,7 @@ const PriceFilter = ({
         <Label className="font-medium text-base">Maximum Price</Label>
         <Input
           type="text"
-          placeholder="ထ"
+          placeholder="∞"
           value={maxPrice ? formateAsCurrency(maxPrice) : ""}
           onChange={handleMaxPriceChange}
         />
