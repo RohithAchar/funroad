@@ -35,14 +35,18 @@ const ProductFilter = ({ title, clasName, children }: ProductFilterProps) => {
 const ProductFilters = () => {
   const [filters, setFilters] = useProductFilters();
 
-  const hasAnyFilters = Object.entries(filters).some(([, value]) => {
-    console.log(value);
+  const hasAnyFilters = Object.entries(filters).some(([key, value]) => {
+    if (key === "sort") return false;
+
     if (typeof value === "string") {
       return value !== "";
     }
+
     if (Array.isArray(value)) {
       return value.length > 0;
     }
+
+    return value !== null;
   });
 
   const onClear = () => {
