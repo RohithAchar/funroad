@@ -138,6 +138,17 @@ const categories = [
 const runSeed = async () => {
   const payload = await getPayload({ config });
 
+  // Create admin user
+  await payload.create({
+    collection: "users",
+    data: {
+      email: "admin@funroad.com",
+      username: "admin",
+      password: "admin",
+      roles: ["super-admin"],
+    },
+  });
+
   for (const category of categories) {
     const parent = await payload.create({
       collection: "categories",
